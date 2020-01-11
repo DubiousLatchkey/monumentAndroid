@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "135102783274",
+    "firebase_url": "https://monument-f8889.firebaseio.com",
+    "project_id": "monument-f8889",
+    "storage_bucket": "monument-f8889.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135102783274:android:a8357ade85fc20ce274853",
+        "android_client_info": {
+          "package_name": "com.example.monument"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135102783274-nk06bqt7qvr6sip26ob8rgqofcbb2dv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.monument",
+            "certificate_hash": "5f003b51728abb0f43f6415f1f047c4bd6092538"
+          }
+        },
+        {
+          "client_id": "135102783274-16vudvigodd0kib2qq9hfm8g1rhutogd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEXdDsftOzSndR17jFJzXrpsJRPaag87Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135102783274-16vudvigodd0kib2qq9hfm8g1rhutogd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "135102783274-2t1i90k4q7oicd4h1eidgibur7tp26d3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sbhacks.MonumentApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
