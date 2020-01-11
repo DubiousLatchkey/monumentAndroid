@@ -67,7 +67,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
-    <androidx.cardview.widget.CardView
+    <Button
         android:id="@+id/login"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -77,14 +77,12 @@
         android:layout_marginBottom="64dp"
         android:clickable="true"
         android:enabled="false"
-        app:cardBackgroundColor="#FF9800"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="10dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.76">
+        app:layout_constraintVertical_bias="0.76"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -97,7 +95,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/action_sign_in"
                 android:textColor="#fff"
-                android:textSize="20dp"/>
+                android:textSize="20dp" />
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
