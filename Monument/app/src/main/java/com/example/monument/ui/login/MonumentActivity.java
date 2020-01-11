@@ -1,5 +1,6 @@
 package com.example.monument.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.monument.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.cloud.landmark.FirebaseVisionCloudLandmark;
+import com.google.firebase.ml.vision.cloud.landmark.FirebaseVisionCloudLandmarkDetector;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+
+import java.util.List;
 
 public class MonumentActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -55,6 +65,24 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             preview.setImageBitmap(imageBitmap);
+
+            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
+            FirebaseVisionCloudLandmarkDetector detector = FirebaseVision.getInstance()
+                    .getVisionCloudLandmarkDetector();
+
+            Task<List<FirebaseVisionCloudLandmark>> result = detector.detectInImage(image)
+                    .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionCloudLandmark>>() {
+                        @Override
+                        public void onSuccess(List<FirebaseVisionCloudLandmark> firebaseVisionCloudLandmarks) {
+                            Log.d("location", "Success");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("location", "Failure");
+                        }
+                    });
         }
     }
 }
