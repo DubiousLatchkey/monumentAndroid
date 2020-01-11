@@ -3,6 +3,7 @@ package com.example.monument.ui.login;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -62,6 +64,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        googleMap.setOnMarkerClickListener(this);
+
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -90,5 +94,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         });
 
     }
-    
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Intent intent = new Intent(this, MonumentActivity.class);
+        intent.putExtra("monumentName", marker.getTitle());
+        startActivity(intent);
+        return false;
+    }
 }
