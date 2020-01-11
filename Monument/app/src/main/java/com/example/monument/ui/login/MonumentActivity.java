@@ -71,6 +71,7 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             preview.setImageBitmap(imageBitmap);
 
+            //Check image against landmarks
             FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
             FirebaseVisionCloudLandmarkDetector detector = FirebaseVision.getInstance()
                     .getVisionCloudLandmarkDetector();
