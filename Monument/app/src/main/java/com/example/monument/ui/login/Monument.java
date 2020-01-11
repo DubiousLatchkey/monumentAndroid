@@ -1,19 +1,19 @@
 package com.example.monument.ui.login;
+import com.google.firebase.ml.vision.cloud.landmark.FirebaseVisionCloudLandmark;
+
 import java.io.*;
 import java.util.*;
 
 public class Monument {
     //Instance Variables
     private String name;
-    private int x;
-    private int y;
+    private FirebaseVisionCloudLandmark landmark;
     private int worth;
 
     //Constructor
-    public Monument(String n, int x, int y, int worth) {
+    public Monument(String n, FirebaseVisionCloudLandmark l, int worth) {
         this.name = n;
-        this.x = x;
-        this.y = y;
+        landmark = l;
         this.worth = worth;
     }
 
@@ -21,12 +21,10 @@ public class Monument {
     public String getName() {
         return name;
     }
-    public int getX() {
-        return x;
+    public FirebaseVisionCloudLandmark getLandmark() {
+        return landmark;
     }
-    public int getY() {
-        return y;
-    }
+
     public int getWorth() {
         return worth;
     }

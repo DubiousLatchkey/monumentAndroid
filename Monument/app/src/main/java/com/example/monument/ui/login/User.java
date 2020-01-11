@@ -7,12 +7,13 @@ public class User {
     private String username;
     private String password;
     private ArrayList<Monument> monuments = new ArrayList<Monument>();
-    private int currency = 0;
+    private long currency = 0;
 
     //Constructor
-    public User(String user, String pass) {
+    public User(String user, long currency) {
         this.username = user;
-        this.password = pass;
+        //this.password = pass;
+        this.currency = currency;
     }
 
     //Methods
@@ -31,7 +32,7 @@ public class User {
     public String getPass() {
         return password;
     }
-    public int getCurrency() {
+    public long getCurrency() {
         return currency;
     }
 }

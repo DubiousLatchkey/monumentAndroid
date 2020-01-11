@@ -148,6 +148,8 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+
+
                             Toast.makeText(LoginActivity.this, "Authentication Succeeded.",
                                     Toast.LENGTH_SHORT).show();
                             goToMap();
@@ -188,7 +190,12 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     }
 
     private void goToMap(){
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
         Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("user", user.getEmail());
+
         startActivity(intent);
     }
 }

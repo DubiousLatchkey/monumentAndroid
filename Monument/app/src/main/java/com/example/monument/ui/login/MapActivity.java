@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,12 +32,16 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
     private ArrayList<LatLng> monuments;
+
+    public User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +90,34 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                         GeoPoint geoPoint = document.getGeoPoint("location");
                         monuments.add(new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude()));
                         mMap.addMarker(new MarkerOptions().position(monuments.get(monuments.size() - 1)).title(document.getId()));
+                    }
+
+                } else {
+                    //Log.w(TAG, "Error getting documents.", task.getException());
+                }
+            }
+        });
+
+        final CollectionReference userData = db.collection("UserData");
+        userData.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    boolean found = false;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //Toast.makeText(this, document.getData(), Toast.LENGTH_SHORT).show();
+                        Log.d("user", document.getId() + " => " + document.getData());
+
+                        if(document.getId().equals(getIntent().getStringExtra("user"))){
+                            user = new User(document.getId(), document.getLong("Currency"));
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found){
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("Currency", 0);
+                        userData.document(getIntent().getStringExtra("user")).set(data);
                     }
 
                 } else {
