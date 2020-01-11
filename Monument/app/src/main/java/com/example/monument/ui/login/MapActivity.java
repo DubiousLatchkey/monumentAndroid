@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,6 +48,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
     private GoogleMap mMap;
+    private FloatingActionButton storeButton;
 
     private ArrayList<LatLng> monuments;
 
@@ -65,7 +68,15 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        monuments = new ArrayList<LatLng>();
+        monuments = new ArrayList<>();
+        storeButton = findViewById(R.id.storeButton);
+        storeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MonumentActivity.class); //Placeholder, TODO: replace with store class
+                startActivity(intent);
+            }
+        });
     }
 
 
