@@ -122,9 +122,9 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void gotItRight(){
-        Toast.makeText(this, ("That does look like the" +title.getText()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ("That does look like the " +title.getText()), Toast.LENGTH_SHORT).show();
     }
     private void gotItWrong(){
-        Toast.makeText(this, ("That doesn't look like the" +title.getText()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ("That doesn't look like the " +title.getText()), Toast.LENGTH_SHORT).show();
     }
 }
