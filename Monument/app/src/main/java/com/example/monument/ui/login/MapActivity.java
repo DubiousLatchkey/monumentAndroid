@@ -6,9 +6,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +20,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 
 import com.example.monument.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +30,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,7 +58,11 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
     private ArrayList<LatLng> monuments;
 
-    public User user;
+    public static User user;
+    //LocationManager locationManager;
+    private FusedLocationProviderClient fusedLocationClient;
+
+    private Intent intent;
 
     private int PERMISSIONS_REQUEST_ENABLE_GPS = 1;
 
@@ -68,6 +78,9 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        intent = new Intent(this, MonumentActivity.class);
+
+
         monuments = new ArrayList<>();
         storeButton = findViewById(R.id.storeButton);
         storeButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +90,8 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
                 startActivity(intent);
             }
         });
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
     }
 
 
@@ -98,6 +113,8 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
+            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -179,15 +196,42 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
             }
         });
 
+        //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
     }
 
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
-        Intent intent = new Intent(this, MonumentActivity.class);
-        intent.putExtra("monumentName", marker.getTitle());
-        startActivity(intent);
+    public boolean onMarkerClick(final Marker marker) {
+
+        //Log.d("Location", locationManager.getLastKnownLocation());
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            float[] results = new float[2];
+                            Location.distanceBetween(location.getLatitude(), location.getLongitude(), marker.getPosition().latitude, marker.getPosition().longitude, results);
+                            Log.d("distance: ", Float.toString(results[0]));
+
+                            if(results[0] < 1000){
+                                intent.putExtra("monumentName", marker.getTitle());
+                                startActivity(intent);
+                            }
+                            else {
+                                rejectLocation();
+                            }
+
+                        }
+                    }
+                });
+
         return false;
+    }
+    private void rejectLocation(){
+        Toast.makeText(this,"You aren't close enough", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -202,4 +246,5 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         // (the camera animates to the user's current position).
         return false;
     }
+
 }
