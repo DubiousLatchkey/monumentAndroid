@@ -6,30 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.MonumentActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <TextView
-            android:id="@+id/monumentName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="100dp"
-            android:text="Example Text" />
+        <ImageView
+            android:id="@+id/im1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/editedframe" />
 
         <Button
             android:id="@+id/photoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="129dp"
+            android:layout_marginTop="567dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginBottom="84dp"
+            android:background="@drawable/custom_camera_button"
             android:text="Take Photo" />
+
+        <TextView
+            android:id="@+id/monumentName"
+            android:layout_width="183dp"
+            android:layout_height="78dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="114dp"
+            android:layout_marginTop="49dp"
+            android:layout_marginEnd="113dp"
+            android:layout_marginBottom="604dp"
+            android:text="example text"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/previewLayout"
+        android:layout_width="174dp"
+        android:layout_height="386dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/previewImageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

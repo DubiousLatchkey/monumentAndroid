@@ -27,6 +27,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,8 +53,8 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     EditText passwordEditText;
     Button loginButton;
     ProgressBar loadingProgressBar;
+    ImageView logoImage;
     CheckBox checkBox;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
         checkBox = findViewById(R.id.checkBox);
         loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
+        logoImage = findViewById(R.id.monumentLogo);
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPreferencesEditor = loginPreferences.edit();
         saveLogin = loginPreferences.getBoolean("saveLogin", false);
