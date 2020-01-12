@@ -12,18 +12,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +29,7 @@ import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import com.example.monument.MainActivity;
+import com.example.monument.ShopActivity;
 import com.example.monument.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -49,13 +45,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Tag;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -69,11 +58,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
@@ -290,8 +277,9 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ShopActivity.class);
                 intent.putExtra("currency", user.getCurrency());
+                intent.putExtra("user", user.getUser());
                 startActivity(intent);
             }
         });
@@ -588,6 +576,31 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
 
     @Override
     public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        final CollectionReference userData = db.collection("UserData");
+        userData.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                        if (document.getId().equals(getIntent().getStringExtra("user"))) {
+                            user = new User(document.getId(), document.getLong("Currency"));
+
+                        }
+                    }
+                }
+
+            }
+        });
 
     }
 }

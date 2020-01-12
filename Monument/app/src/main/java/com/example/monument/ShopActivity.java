@@ -1,8 +1,8 @@
 package com.example.monument;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -16,7 +16,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import com.example.monument.ui.login.MapActivity;
+import com.example.monument.ui.login.User;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ShopActivity extends AppCompatActivity implements View.OnClickListener{
 
     ImageView bgapp, clover;
     LinearLayout textsplash, texthome, menus;
@@ -28,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_shop);
 
         currency = getIntent().getLongExtra("currency", 0);
 
@@ -115,5 +130,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         coins.setText(Long.toString(currency));
+        setCurrency(currency);
+    }
+
+    private void setCurrency(final long value){
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final CollectionReference userData = db.collection("UserData");
+        userData.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //Toast.makeText(this, document.getData(), Toast.LENGTH_SHORT).show();
+
+                        if (document.getId().equals(getIntent().getStringExtra("user"))) {
+                            Map<String, Object> updates = new HashMap<>();
+                            updates.put("Currency", value);
+
+                            db.collection("UserData").document(document.getId()).set(updates);
+
+                            break;
+                        }
+                    }
+
+                } else {
+                    //Log.w(TAG, "Error getting documents.", task.getException());
+                }
+            }
+
+
+        });
+
     }
 }
