@@ -3,11 +3,9 @@ package com.example.monument.ui.login;
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,10 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 
 
-import android.os.Debug;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -33,8 +29,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.monument.R;
-import com.example.monument.ui.login.LoginViewModel;
-import com.example.monument.ui.login.LoginViewModelFactory;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -64,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
                 .get(LoginViewModel.class);
 
         usernameEditText = findViewById(R.id.username);
-        passwordEditText = findViewById(R.id.password);
+        passwordEditText = findViewById(R.id.passwordText);
         checkBox = findViewById(R.id.checkBox);
         loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);

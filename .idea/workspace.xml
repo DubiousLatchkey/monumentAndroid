@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-
-    <list default="true" id="ec5ecd38-70ba-4e5d-a305-673315075496" name="Default Changelist" comment="" />
+    <list default="true" id="ec5ecd38-70ba-4e5d-a305-673315075496" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Monument/app/src/main/java/com/example/monument/Activity1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Monument/app/src/main/java/com/example/monument/Activity2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Monument/app/src/main/res/layout/activity_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Monument/app/src/main/res/layout/activity_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Monument/app/src/main/res/layout/activity_register.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monument/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Monument/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monument/app/src/main/java/com/example/monument/ui/login/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Monument/app/src/main/java/com/example/monument/ui/login/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monument/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Monument/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -11,9 +19,8 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Monument/app/src/main/java/com/example/monument/ui/login/MapActivity.java">
           <provider selected="true" editor-type-id="text-editor" />
@@ -31,7 +38,6 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-
     <option name="width" value="1386" />
     <option name="height" value="826" />
   </component>
@@ -40,9 +46,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,12 +164,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -188,7 +192,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-
       <changelist id="ec5ecd38-70ba-4e5d-a305-673315075496" name="Default Changelist" comment="" />
       <created>1578746507391</created>
       <option name="number" value="Default" />
@@ -199,7 +202,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1386" height="826" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.32967034" />
@@ -275,7 +277,6 @@
           </splitter-proportions>
         </settings>
       </state>
-
       <state key="ModuleStructureConfigurable.UI">
         <settings>
           <last-edited>monumentAndroid</last-edited>
