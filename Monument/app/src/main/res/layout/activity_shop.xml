@@ -107,10 +107,12 @@
 
                 <Button
                     android:id="@+id/button"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Purchase - 5"
-                    android:textSize="10sp" />
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/holo_purple"
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
 
@@ -136,10 +138,12 @@
 
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Purchase - 10"
-                    android:textSize="10sp" />
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/holo_purple"
+                    android:textColor="@android:color/white"/>
 
                 />
 
@@ -176,10 +180,12 @@
 
                 <Button
                     android:id="@+id/button3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Purchase - 15"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/holo_purple"
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
 
@@ -205,10 +211,12 @@
 
                 <Button
                     android:id="@+id/button4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Purchase - 20"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:backgroundTint="@android:color/holo_purple"
+                    android:textColor="@android:color/white"/>
 
             </LinearLayout>
 
