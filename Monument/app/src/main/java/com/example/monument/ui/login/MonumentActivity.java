@@ -150,7 +150,7 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
 
                         if(document.getId().equals(getIntent().getStringExtra("user"))){
                             HashMap<String, Object> data = new HashMap<>();
-
+                            found = true;
                             visitedMonuments = getIntent().getExtras().getStringArrayList("monuments");
                             if(visitedMonuments == null){
                                 visitedMonuments = new ArrayList<>();
@@ -173,7 +173,6 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
                             }
 
 
-                            found = true;
                             break;
                         }
                     }
