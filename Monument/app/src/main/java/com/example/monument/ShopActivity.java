@@ -40,6 +40,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     long currency;
     Button button, button2, button3, button4;
     TextView nameView;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_shop);
 
         currency = getIntent().getLongExtra("currency", 0);
+        name = getIntent().getStringExtra("name");
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 
@@ -62,7 +64,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         button4 = (Button) findViewById(R.id.button4);
         nameView = findViewById(R.id.greeting);
 
-        nameView.setText(getIntent().getStringExtra("name"));
+        nameView.setText(name);
 
         button.setOnClickListener(this);
         button2.setOnClickListener(this);

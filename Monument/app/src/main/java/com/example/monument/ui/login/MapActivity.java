@@ -314,6 +314,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 intent.putExtra("currency", user.getCurrency());
                 intent.putExtra("user", user.getUser());
+                intent.putExtra("name", name);
                 startActivity(intent);
             }
         });
@@ -324,7 +325,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                 Intent intent = new Intent(getApplicationContext(), ShopActivity.class);
                 intent.putExtra("currency", user.getCurrency());
                 intent.putExtra("user", user.getUser());
-                intent.putExtra("name", getIntent().getStringExtra("name"));
+                intent.putExtra("name", name);
                 startActivity(intent);
             }
         });
@@ -632,7 +633,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
 
                         if (document.getId().equals(getIntent().getStringExtra("user"))) {
                             user = new User(document.getId(), document.getLong("Currency"));
-
+                            name = document.getString("name");
                         }
                     }
                 }
