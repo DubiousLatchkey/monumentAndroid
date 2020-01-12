@@ -8,12 +8,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView bgapp, clover;
     LinearLayout textsplash, texthome, menus;
     Animation frombottom;
+    TextView coins;
     long currency;
 
     @Override
@@ -25,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 
-
         bgapp = (ImageView) findViewById(R.id.bgapp);
         clover = (ImageView) findViewById(R.id.clover);
         textsplash = (LinearLayout) findViewById(R.id.textsplash);
         texthome = (LinearLayout) findViewById(R.id.texthome);
         menus = (LinearLayout) findViewById(R.id.menus);
+        coins = (TextView) findViewById(R.id.currency);
 
         bgapp.animate().translationY(-1500).setDuration(800).setStartDelay(300);
         clover.animate().alpha(0).setDuration(800).setStartDelay(600);
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         texthome.startAnimation(frombottom);
         menus.startAnimation(frombottom);
+        coins.setText(Long.toString(currency));
 
     }
 }

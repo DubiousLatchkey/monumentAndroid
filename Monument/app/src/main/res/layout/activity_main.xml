@@ -86,7 +86,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="23dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -95,12 +95,12 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/bitcon" />
+                    android:src="@drawable/level_up" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BitCoin"
+                    android:text="Level Up"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -109,29 +109,29 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="85dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="4dp"
-                    android:src="@drawable/bellcon" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/mileage"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bells"
+                    android:text="Miles"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
+                />
+
+
             </LinearLayout>
 
-
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -139,7 +139,6 @@
             android:layout_marginBottom="70dp"
             android:orientation="horizontal">
 
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,17 +146,16 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/bookcon" />
+                    android:src="@drawable/giftvoucher" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Books"
+                    android:text="Hotel Voucher"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -166,21 +164,20 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="25dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/bugcon" />
+                    android:src="@drawable/voucher" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reports"
+                    android:text="Tour Voucher"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -212,15 +209,24 @@
         android:textColor="#FFF"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="95dp" />
+        tools:layout_editor_absoluteY="71dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="da goods"
+        android:text="Currency:"
+        android:textColor="#FFF"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="#FFF"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="171dp"
-        tools:layout_editor_absoluteY="135dp" />
+        tools:layout_editor_absoluteX="360dp"
+        tools:layout_editor_absoluteY="23dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
