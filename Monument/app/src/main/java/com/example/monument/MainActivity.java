@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         texthome = (LinearLayout) findViewById(R.id.texthome);
         menus = (LinearLayout) findViewById(R.id.menus);
 
-        bgapp.animate().translationY(-1900).setDuration(800).setStartDelay(300);
+        bgapp.animate().translationY(-1200).setDuration(800).setStartDelay(300);
         clover.animate().alpha(0).setDuration(800).setStartDelay(600);
         textsplash.animate().translationY(140).alpha(0).setDuration(800).setStartDelay(300);
 

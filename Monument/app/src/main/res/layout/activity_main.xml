@@ -28,21 +28,21 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome,"
+            android:text="Good Morning"
             android:textColor="#FFF"
-            android:textSize="50sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ryan"
+            android:text="Mr Panda Risky"
             android:textColor="#FFF"
-            android:textSize="36sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -53,13 +53,27 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
         android:elevation="6dp"
-        android:gravity="center"
+        android:gravity="left"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop"
+            android:textColor="#FFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="da goods"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
 
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/menus"
@@ -100,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Obj1"
+                    android:text="BitCoin"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -123,7 +137,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Obj2"
+                    android:text="Bells"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -157,7 +171,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Obj3"
+                    android:text="Books"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -180,7 +194,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Obj4"
+                    android:text="Reports"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
@@ -204,23 +218,5 @@
         app:layout_constraintHorizontal_bias="0.923"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="the endless possibilities"
-        android:textColor="#FFF"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="140dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Shop"
-        android:textColor="#FFF"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="100dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
