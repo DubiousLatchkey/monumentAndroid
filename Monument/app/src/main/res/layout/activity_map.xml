@@ -18,16 +18,6 @@
 
         </Button>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/profileButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            android:src="@color/colorAccent"
-            app:elevation="4dp" />
-
         <TextView
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -88,6 +78,15 @@
                 app:layout_anchorGravity="center"
                 />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/profileButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:src="@color/colorAccent"
+            app:elevation="4dp" />
 
         <TextView
             android:layout_width="wrap_content"

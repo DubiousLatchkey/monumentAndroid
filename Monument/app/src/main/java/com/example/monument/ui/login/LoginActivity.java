@@ -207,30 +207,27 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     public void onClick(View v) {
         //System.out.println("Button Pressed");
         //Toast.makeText(getApplicationContext(), "Button Pressed", Toast.LENGTH_SHORT).show();
-        switch (v.getId()) {
+        username = usernameEditText.getText().toString();
+        password = passwordEditText.getText().toString();
+        if (v.getId() == loginButton.getId()) {
+            if (checkBox.isChecked()) {
+                loginPreferencesEditor.putBoolean("saveLogin", true);
+                loginPreferencesEditor.putString("username", username);
+                loginPreferencesEditor.putString("password", password);
+                loginPreferencesEditor.commit();
+            } else {
+                loginPreferencesEditor.clear();
+                loginPreferencesEditor.commit();
+            }
 
-            case R.id.login:
-                username = usernameEditText.getText().toString();
-                password = passwordEditText.getText().toString();
+            signIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+        }
 
-                if (checkBox.isChecked()) {
-                    loginPreferencesEditor.putBoolean("saveLogin", true);
-                    loginPreferencesEditor.putString("username", username);
-                    loginPreferencesEditor.putString("password", password);
-                    loginPreferencesEditor.commit();
-                } else {
-                    loginPreferencesEditor.clear();
-                    loginPreferencesEditor.commit();
-                }
 
-                if(v.getId() == loginButton.getId()){
-                    signIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                }
-                break;
+        else if (v.getId() == registerButton.getId()){
 
-            case R.id.registerButton:
-                Intent intent = new Intent(this,RegisterActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(this,RegisterActivity.class);
+            startActivity(intent);
         }
 
 
