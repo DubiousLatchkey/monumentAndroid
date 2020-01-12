@@ -1,4 +1,4 @@
-package com.example.monument.ui.login;
+package com.example.monument.data.model;
 import com.google.firebase.ml.vision.cloud.landmark.FirebaseVisionCloudLandmark;
 
 import java.io.*;

@@ -1,6 +1,6 @@
-package com.example.monument.ui.login;
-import java.io.*;
-import java.lang.reflect.Array;
+package com.example.monument.data.model;
+import com.example.monument.data.model.Monument;
+
 import java.util.*;
 
 public class User {
