@@ -8,7 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class ShopActivity extends AppCompatActivity {
 
     ImageView bgapp, clover;
     LinearLayout textsplash, texthome, menus;
