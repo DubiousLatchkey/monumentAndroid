@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="180dp"
         android:layout_marginEnd="8dp"
         android:elevation="6dp"
         android:orientation="vertical"
@@ -86,7 +86,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="25dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -104,12 +104,18 @@
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="85dp"
+                android:layout_marginLeft="80dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -126,6 +132,12 @@
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
 
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
+
                 />
 
 
@@ -136,28 +148,34 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="0dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-15dp"
+                android:layout_marginLeft="0dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginBottom="0dp"
                     android:src="@drawable/giftvoucher" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hotel Voucher"
+                    android:text="  Hotel Voucher"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
 
             </LinearLayout>
 
@@ -171,7 +189,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginBottom="0dp"
                     android:src="@drawable/voucher" />
 
                 <TextView
@@ -180,6 +198,12 @@
                     android:text="Tour Voucher"
                     android:textColor="#0E1843"
                     android:textSize="22sp" />
+
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
 
             </LinearLayout>
 
@@ -219,7 +243,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="40dp"
         android:text="Currency:"
         android:textColor="#FFF"
         android:textSize="24sp"
@@ -231,7 +255,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
-        android:layout_marginEnd="51dp"
+        android:layout_marginEnd="15dp"
         android:textColor="#FFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
