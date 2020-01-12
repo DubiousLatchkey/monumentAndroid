@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ryan"
+            android:id="@+id/greeting"
             android:textColor="#FFF"
             android:textSize="16sp" />
 

@@ -39,6 +39,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     TextView coins;
     long currency;
     Button button, button2, button3, button4;
+    TextView nameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,9 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
+        nameView = findViewById(R.id.greeting);
+
+        nameView.setText(getIntent().getStringExtra("name"));
 
         button.setOnClickListener(this);
         button2.setOnClickListener(this);

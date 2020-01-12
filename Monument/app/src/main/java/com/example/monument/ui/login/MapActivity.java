@@ -88,6 +88,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
 
     private ArrayList<Integer> pictures = new ArrayList<Integer>();
     public static User user;
+    public String name;
     private int counter = 0;
     //LocationManager locationManager;
     private FusedLocationProviderClient fusedLocationClient;
@@ -97,7 +98,6 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
     private int PERMISSIONS_REQUEST_ENABLE_GPS = 1;
 
     private int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9002;
-    private ClusterManager mClusterManager;
     private MyClusterManagerRenderer mClusterManagerRenderer;
     private ArrayList<ClusterMarker> mClusterMarkers = new ArrayList<>();
 
@@ -218,17 +218,6 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         final CollectionReference locations = db.collection("Locations");
-        if(mClusterManager == null){
-              mClusterManager = new ClusterManager<ClusterMarker>(getApplicationContext(), mMap);
-        }
-        if(mClusterManagerRenderer == null){
-            mClusterManagerRenderer = new MyClusterManagerRenderer(
-                    getApplicationContext(),
-                    mMap,
-                    mClusterManager
-            );
-            mClusterManager.setRenderer(mClusterManagerRenderer);
-        }
 
         locations.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -265,6 +254,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
 
                         if (document.getId().equals(getIntent().getStringExtra("user"))) {
                             user = new User(document.getId(), document.getLong("Currency"));
+                            name = document.getString("Name");
                             found = true;
                             if ((ArrayList<String>) document.get("Monuments") != null) {
                                 user.setVisited((ArrayList<String>) document.get("Monuments"));
@@ -273,7 +263,6 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                                 user.setVisited(new ArrayList<String>());
                             }
                             if(document.get("Balloon") != null) {
-
                                 myMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(document.getGeoPoint("Balloon").getLatitude(), document.getGeoPoint("Balloon").getLongitude())).title("Your Marker"));
                             }
                             else {
@@ -294,6 +283,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                     if (!found) {
                         Map<String, Object> data = new HashMap<>();
                         data.put("Currency", 0);
+                        data.put("Name", getIntent().getStringExtra("name"));
                         userData.document(getIntent().getStringExtra("user")).set(data);
                     }
 
@@ -307,13 +297,23 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
 
         });
 
+
+
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+    }
+
+    private void initializeLocation() {
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+
         profileButton = findViewById(R.id.profileButton);
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 intent.putExtra("currency", user.getCurrency());
-                intent.putExtra("email", user.getUser());
+                intent.putExtra("user", user.getUser());
                 startActivity(intent);
             }
         });
@@ -324,17 +324,11 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                 Intent intent = new Intent(getApplicationContext(), ShopActivity.class);
                 intent.putExtra("currency", user.getCurrency());
                 intent.putExtra("user", user.getUser());
+                intent.putExtra("name", getIntent().getStringExtra("name"));
                 startActivity(intent);
             }
         });
 
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-    }
-
-    private void initializeLocation() {
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
     }
     public static boolean isLocationEnabled(Context context) {
         int locationMode = 0;

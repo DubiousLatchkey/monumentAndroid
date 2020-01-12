@@ -1,102 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.example.ribbit.MainActivity$PlaceholderFragment"
     android:background="@drawable/backgroundbuilding">
 
 
     <TextView
         android:id="@android:id/empty"
-        android:layout_width="134dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="45dp"
         android:layout_marginTop="100dp"
         android:text="Register"
-        android:textAlignment="textStart"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="30sp" />
 
     <TextView
         android:id="@+id/emailText"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/prompt_email"
-        android:textColor="@android:color/black" />
+        android:layout_marginLeft="20dp"
 
-    <TextView
-        android:id="@+id/passwordText"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="295dp"
-        android:text="@string/prompt_password"
         android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="320dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="335dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress" />
+    <TextView
+        android:id="@+id/passwordText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_password"
+        android:layout_marginLeft="20dp"
+
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="320dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="260dp"
+        android:layout_height="wrap_content"
+
         android:ems="10"
         android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/nameText"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_height="wrap_content"
         android:text="Name"
         android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="320dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="235dp"
-        android:layout_marginEnd="44dp"
-        android:ems="10"
+        android:layout_height="wrap_content"
         android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="100dp"
+
         android:backgroundTint="@android:color/holo_purple"
         android:text="Create Account"
         android:textAllCaps="false"
@@ -106,9 +83,7 @@
         android:id="@+id/catching"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"
+        android:layout_gravity="center"
         android:text="Already have an account?"
         android:textAlignment="viewStart" />
 
@@ -116,12 +91,10 @@
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
+
         android:backgroundTint="@android:color/holo_purple"
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@android:color/white" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -1,88 +1,107 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
     android:background="@drawable/backgroundbuilding"
     tools:context="com.example.ribbit.MainActivity$PlaceholderFragment" >
 
 
     <ImageView
         android:id="@+id/monumentLogo"
-        android:layout_width="207dp"
-        android:layout_height="213dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        android:scaleX="0.65"
+        android:scaleY="0.65"
         android:src="@drawable/clearmonumental" />
 
-    <TextView
-        android:id="@+id/emailText"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="300dp"
-        android:text="@string/prompt_email"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/passwordText"
-        android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="295dp"
-        android:text="@string/prompt_password"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="320dp"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="323dp"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="260dp"
-        android:ems="10"
-        android:inputType="textPassword" />
+        >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/emailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prompt_email"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/passwordText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/prompt_password"
+                android:textColor="@android:color/black" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+
+                android:ems="10"
+                android:inputType="textPassword" />
+        </TableRow>
+    </TableLayout>
 
     <Button
         android:id="@+id/login"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginBottom="200dp"
         android:backgroundTint="@android:color/holo_purple"
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@android:color/white" />
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:text="Remember Me" />
+
     <TextView
         android:id="@+id/catching"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="75dp"
         android:text="Dont have an account?"
         android:textAlignment="viewStart" />
 
@@ -90,33 +109,21 @@
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
         android:backgroundTint="@android:color/holo_purple"
         android:text="Create an account"
         android:textAllCaps="false"
         android:textColor="@android:color/white" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="125dp"
-        android:layout_height="35dp"
-        android:layout_centerHorizontal="false"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="550dp"
-        android:text="Remember Me" />
+
 
     <ProgressBar
         android:id="@+id/loading"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="181dp"
-        android:layout_marginEnd="182dp"
         android:layout_marginBottom="19dp" />
 
-</RelativeLayout>
+
+
+
+</LinearLayout>
