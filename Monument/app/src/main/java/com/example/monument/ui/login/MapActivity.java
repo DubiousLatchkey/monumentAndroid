@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+import com.example.monument.MainActivity;
 import com.example.monument.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -88,7 +89,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MonumentActivity.class); //Placeholder, TODO: replace with store class
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class); //Placeholder, TODO: replace with store class
                 startActivity(intent);
             }
         });
