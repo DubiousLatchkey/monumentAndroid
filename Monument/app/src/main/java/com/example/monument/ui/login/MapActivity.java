@@ -61,6 +61,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
     private GoogleMap mMap;
     private FloatingActionButton storeButton;
+    private FloatingActionButton profileButton;
 
     private ArrayList<LatLng> monuments;
 
@@ -100,6 +101,9 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
             }
         });
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
+
 
     }
 
@@ -219,6 +223,18 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
                 } else {
                     //Log.w(TAG, "Error getting documents.", task.getException());
                 }
+            }
+        });
+
+
+        profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                intent.putExtra("currency", user.getCurrency());
+                intent.putExtra("email", user.getUser());
+                startActivity(intent);
             }
         });
 

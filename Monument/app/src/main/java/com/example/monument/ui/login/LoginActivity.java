@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     EditText usernameEditText;
     EditText passwordEditText;
     Button loginButton;
+    Button registerButton;
     ProgressBar loadingProgressBar;
     ImageView logoImage;
     CheckBox checkBox;
@@ -67,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
         passwordEditText = findViewById(R.id.password);
         checkBox = findViewById(R.id.checkBox);
         loginButton = findViewById(R.id.login);
+        registerButton = findViewById(R.id.registerButton);
         loadingProgressBar = findViewById(R.id.loading);
         logoImage = findViewById(R.id.monumentLogo);
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
