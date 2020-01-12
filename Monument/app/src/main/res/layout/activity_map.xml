@@ -7,6 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
@@ -14,22 +16,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/placeBalloonButton"
+            android:layout_gravity="left"
+
             android:text="Place Balloon">
 
         </Button>
 
         <TextView
+            android:id="@+id/nearestBalloon"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:textAlignment="center"
-            android:id="@+id/nearestBalloon"
-            android:text="The Closest Balloon is 42 meters away"></TextView>
+            android:text="The Closest Balloon is 42 meters away"
+            android:textAlignment="center"></TextView>
 
         <ImageView
             android:id="@+id/previewBalloonImage"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_gravity="right"
             android:clickable="true"></ImageView>
 
     </LinearLayout>

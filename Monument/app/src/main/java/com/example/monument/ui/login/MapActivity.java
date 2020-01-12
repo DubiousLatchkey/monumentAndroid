@@ -494,6 +494,8 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                             // Logic to handle location object
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             Map<String, Object> balloonPosition = new HashMap<>();
+                            balloonPosition.put("Name", name);
+                            balloonPosition.put("Currency", user.getCurrency());
                             balloonPosition.put("Balloon", new GeoPoint(location.getLatitude(), location.getLongitude()));
                             db.collection("UserData").document(user.getUser()).set(balloonPosition);
                             if(myMarker != null) {myMarker.remove();}
@@ -530,6 +532,8 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
         Collections.sort(otherBalloons);
         if(otherBalloons.size() != 0){
 
+            Collections.sort(otherBalloons);
+
             StorageReference storageReference = FirebaseStorage.getInstance().getReference();
             StorageReference pathReference = storageReference.child("Images/" + otherBalloons.get(0).name +".jpg");
             final long FIVE_MEGABYTE = 1024 * 1024 * 5;
@@ -548,14 +552,15 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                 }
             });
 
-
-
             Log.d("Scored:", otherBalloons.get(0).name +" " + otherBalloons.get(0).distanceToPlayer);
             nearestBalloonText.setText("The nearest balloon is " +otherBalloons.get(0).distanceToPlayer +"m away");
 
             if(otherBalloons.get(0).distanceToPlayer < 2.5 ) {
                 //Score!
                 Log.d("Scored:", "Scored " + otherBalloons.get(0).name + "'s Balloon!");
+
+
+
                 final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                 final CollectionReference userData = db.collection("UserData");
@@ -578,10 +583,13 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             DocumentReference player = FirebaseFirestore.getInstance().collection("UserData").document(user.getUser());
-                                            Map<String,Object> updates = new HashMap<>();
+                                            Map<String, Object> updates = new HashMap<>();
                                             updates.put("Currency", user.getCurrency() + 5);
+                                            updates.put("Name", name);
                                             player.set(updates);
                                             otherBalloons.remove(0);
+
+
                                         }
                                         // [START_EXCLUDE]
                                     });
