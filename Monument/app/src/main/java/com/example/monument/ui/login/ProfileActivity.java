@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         emailText.setText(getIntent().getStringExtra("email"));
         backButton.setOnClickListener(this);
         Long currencyAmount = getIntent().getExtras().getLong("currency");
-        currencyText.setText("$" + currencyAmount.toString());
+        currencyText.setText(currencyAmount.toString());
     }
     @Override
     public void onClick(View v) {

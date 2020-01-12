@@ -2,20 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundbuilding"
-    tools:context="com.example.ribbit.MainActivity$PlaceholderFragment" >
+    tools:context="com.example.ribbit.MainActivity$PlaceholderFragment"
+    android:background="@drawable/backgroundbuilding">
 
 
-    <ImageView
-        android:id="@+id/monumentLogo"
-        android:layout_width="207dp"
-        android:layout_height="213dp"
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="134dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/clearmonumental" />
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="100dp"
+        android:text="Register"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/emailText"
@@ -43,18 +45,18 @@
     <EditText
         android:id="@+id/email"
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="323dp"
+        android:layout_marginTop="335dp"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="45dp"
@@ -62,8 +64,32 @@
         android:ems="10"
         android:inputType="textPassword" />
 
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="200dp"
+        android:text="Name"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="320dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
     <Button
-        android:id="@+id/login"
+        android:id="@+id/registerButton"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -72,51 +98,30 @@
         android:layout_marginStart="45dp"
         android:layout_marginBottom="200dp"
         android:backgroundTint="@android:color/holo_purple"
-        android:text="Login"
+        android:text="Create Account"
         android:textAllCaps="false"
         android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/catching"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_width="170dp"
+        android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="75dp"
-        android:text="Dont have an account?"
+        android:layout_marginBottom="80dp"
+        android:text="Already have an account?"
         android:textAlignment="viewStart" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
         android:backgroundTint="@android:color/holo_purple"
-        android:text="Create an account"
+        android:text="Login"
         android:textAllCaps="false"
         android:textColor="@android:color/white" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="125dp"
-        android:layout_height="35dp"
-        android:layout_centerHorizontal="false"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="550dp"
-        android:text="Remember Me" />
-
-    <ProgressBar
-        android:id="@+id/loading"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="181dp"
-        android:layout_marginEnd="182dp"
-        android:layout_marginBottom="19dp" />
 
 </RelativeLayout>
