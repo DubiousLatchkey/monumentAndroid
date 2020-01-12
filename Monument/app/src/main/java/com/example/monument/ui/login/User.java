@@ -1,5 +1,6 @@
 package com.example.monument.ui.login;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class User {
@@ -7,6 +8,7 @@ public class User {
     private String username;
     private String password;
     private ArrayList<Monument> monuments = new ArrayList<Monument>();
+    private ArrayList<String> visited;
     private long currency = 0;
 
     //Constructor
@@ -26,6 +28,14 @@ public class User {
             System.out.println(monuments.get(i));
         }
     }
+
+    public void setVisited(ArrayList<String> visited) {
+        this.visited = visited;
+    }
+    public ArrayList<String> getVisited(){
+        return visited;
+    }
+
     public String getUser() {
         return username;
     }

@@ -46,8 +46,10 @@ import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
@@ -141,11 +143,8 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         mMap.setOnMyLocationClickListener(this);
         googleMap.setOnMarkerClickListener(this);
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34, -119)));
+        ;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         final CollectionReference locations = db.collection("Locations");
@@ -181,6 +180,13 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
                         if(document.getId().equals(getIntent().getStringExtra("user"))){
                             user = new User(document.getId(), document.getLong("Currency"));
                             found = true;
+                            if((ArrayList<String>)document.get("Monuments") != null) {
+                                user.setVisited((ArrayList<String>) document.get("Monuments"));
+                            }
+                            else {
+                                Log.d("Status of arraylist", "empty");
+                                user.setVisited(new ArrayList<String>());
+                            }
                             break;
                         }
                     }
@@ -218,6 +224,11 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
                             if(results[0] < 1000){
                                 intent.putExtra("monumentName", marker.getTitle());
+                                intent.putExtra("user", user.getUser());
+                                intent.putExtra("currency", user.getCurrency());
+                                if(user.getVisited() != null) {
+                                    intent.putStringArrayListExtra("monuments", user.getVisited());
+                                }
                                 startActivity(intent);
                             }
                             else {

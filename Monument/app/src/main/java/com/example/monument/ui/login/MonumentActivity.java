@@ -16,9 +16,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.monument.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.cloud.landmark.FirebaseVisionCloudLandmark;
 import com.google.firebase.ml.vision.cloud.landmark.FirebaseVisionCloudLandmarkDetector;
@@ -27,13 +32,16 @@ import com.google.firebase.ml.vision.common.FirebaseVisionLatLng;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MonumentActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView title;
     Button cameraButton;
     ImageView preview;
+    ArrayList<String> visitedMonuments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,9 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
         cameraButton.setOnClickListener(this);
 
         title.setText(getIntent().getStringExtra("monumentName"));
+
+        visitedMonuments = getIntent().getStringArrayListExtra("monuments");
+        Log.d("tag", visitedMonuments.get(0));
     }
 
     @Override
@@ -124,7 +135,70 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
 
     private void gotItRight(){
         Toast.makeText(this, ("That does look like the " +title.getText()), Toast.LENGTH_SHORT).show();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        final CollectionReference userData = db.collection("UserData");
+        userData.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    boolean found = false;
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        //Toast.makeText(this, document.getData(), Toast.LENGTH_SHORT).show();
+                        Log.d("user", document.getId() + " => " + document.getData());
+
+                        if(document.getId().equals(getIntent().getStringExtra("user"))){
+                            HashMap<String, Object> data = new HashMap<>();
+
+                            visitedMonuments = getIntent().getExtras().getStringArrayList("monuments");
+                            if(visitedMonuments == null){
+                                visitedMonuments = new ArrayList<>();
+                            }
+                            boolean checkedIn = false;
+                            for(String i : visitedMonuments){
+                                if(i.equals(title.getText().toString())){
+                                    checkedIn = true;
+                                    break;
+                                }
+                            }
+                            if(!checkedIn) {
+                                visitedMonuments.add(title.getText().toString());
+                                data.put("Currency", getIntent().getLongExtra("currency", 0) + 5);
+                                data.put("Monuments", visitedMonuments);
+                                userData.document(getIntent().getStringExtra("user")).set(data);
+                            }
+                            else {
+                                alreadyCheckedIn();
+                            }
+
+
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found){
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("Currency", 5);
+                        visitedMonuments = new ArrayList<>();
+                        visitedMonuments.add(title.getText().toString());
+                        data.put("Monuments", visitedMonuments);
+                        userData.document(getIntent().getStringExtra("user")).set(data);
+                    }
+
+                } else {
+                    //Log.w(TAG, "Error getting documents.", task.getException());
+                }
+            }
+        });
+
+
     }
+
+    private void alreadyCheckedIn(){
+        Toast.makeText(this, ("You've already checked into the " +title.getText()), Toast.LENGTH_SHORT).show();
+    }
+
     private void gotItWrong(){
         Toast.makeText(this, ("That doesn't look like the " +title.getText()), Toast.LENGTH_SHORT).show();
     }
