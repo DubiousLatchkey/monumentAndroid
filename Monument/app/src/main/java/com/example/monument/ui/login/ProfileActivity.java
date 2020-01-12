@@ -14,12 +14,16 @@ import android.widget.TextView;
 import com.example.monument.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView currencyText;
     private Button backButton;
     EditText name;
     TextView email;
+    private TextView emailText;
+    private TextView levelText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         backButton = findViewById(R.id.backButton);
         name = findViewById(R.id.nameText);
         email = findViewById(R.id.userText);
+        emailText = findViewById(R.id.emailText);
+        levelText = findViewById(R.id.levelNumber);
 
 
 
@@ -48,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("user", getIntent().getStringExtra("email"));
         startActivity(intent);
     }
 
