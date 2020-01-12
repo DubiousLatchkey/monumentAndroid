@@ -125,7 +125,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
         placeBalloonButton.setOnClickListener(this);
         expandedPreviewImage.setOnClickListener(this);
         previewBaloonImage.setOnClickListener(this);
-        expandedPreviewImage.setImageAlpha(0);
+        expandedPreviewImage.setElevation(-1);
 
 
         monuments = new ArrayList<>();
@@ -367,10 +367,12 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
             dispatchTakePictureIntent();
         }
         else if (v.getId() == previewBaloonImage.getId()){
-            expandedPreviewImage.setImageAlpha(255);
+            //expandedPreviewImage.setImageAlpha(255);
+            expandedPreviewImage.setElevation(10);
         }
         else if (v.getId() == expandedPreviewImage.getId()){
-            expandedPreviewImage.setImageAlpha(0);
+            //expandedPreviewImage.setImageAlpha(0);
+            expandedPreviewImage.setElevation(-1);
         }
     }
 
