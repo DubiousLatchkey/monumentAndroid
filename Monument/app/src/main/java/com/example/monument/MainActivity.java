@@ -3,6 +3,8 @@ package com.example.monument;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 
-
         bgapp = (ImageView) findViewById(R.id.bgapp);
         clover = (ImageView) findViewById(R.id.clover);
         textsplash = (LinearLayout) findViewById(R.id.textsplash);
@@ -37,4 +38,5 @@ public class MainActivity extends AppCompatActivity {
         menus.startAnimation(frombottom);
 
     }
+
 }

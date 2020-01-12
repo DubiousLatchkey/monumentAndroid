@@ -9,27 +9,35 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Icon;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
 import com.example.monument.MainActivity;
 import com.example.monument.R;
+import com.example.monument.data.model.ClusterMarker;
+import com.example.monument.data.model.Landmark;
+import com.example.monument.util.MyClusterManagerRenderer;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -37,34 +45,35 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Tag;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.maps.android.clustering.ClusterManager;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
 GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
     private GoogleMap mMap;
     private FloatingActionButton storeButton;
-
+    private ArrayList<Icon> icons;
     private ArrayList<LatLng> monuments;
+    private ArrayList<MarkerOptions> markers = new ArrayList<>();
+    private ArrayList<Location> mLocationList = new ArrayList<>();
+    private ArrayList<Landmark> mLandmarkList = new ArrayList<>();
 
+
+    private ArrayList<Integer> pictures = new ArrayList<Integer>();
     public static User user;
+    private int counter = 0;
     //LocationManager locationManager;
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -73,6 +82,9 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
     private int PERMISSIONS_REQUEST_ENABLE_GPS = 1;
 
     private int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9002;
+    private ClusterManager mClusterManager;
+    private MyClusterManagerRenderer mClusterManagerRenderer;
+    private ArrayList<ClusterMarker> mClusterMarkers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +93,6 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         if (!isLocationEnabled(this)){
             buildAlertMessageForGps();
         }
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -89,7 +100,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
         intent = new Intent(this, MonumentActivity.class);
 
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         monuments = new ArrayList<>();
         storeButton = findViewById(R.id.storeButton);
         storeButton.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +154,17 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         }
     }
 
+    public void addMarkers(){
 
+        pictures.add(R.drawable.arc_de_triomphe);pictures.add(R.drawable.chichen_itza);
+        pictures.add(R.drawable.colosseum); pictures.add(R.drawable.eiffel_tower);
+        pictures.add(R.drawable.great_sphinx_of_giza); pictures.add(R.drawable.colosseum);
+        pictures.add(R.drawable.mount_rushmore); pictures.add(R.drawable.statue_of_liberty);
+        pictures.add(R.drawable.sydney_opera_house); pictures.add(R.drawable.taipei_101);
+        pictures.add(R.drawable.taj_mahal);
+
+
+    }
 
     /**
      * Manipulates the map once available.
@@ -157,7 +178,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        addMarkers();
         getLocationPermission();
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
@@ -168,22 +189,38 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         final CollectionReference locations = db.collection("Locations");
+        if(mClusterManager == null){
+              mClusterManager = new ClusterManager<ClusterMarker>(getApplicationContext(), mMap);
+        }
+        if(mClusterManagerRenderer == null){
+            mClusterManagerRenderer = new MyClusterManagerRenderer(
+                    getApplicationContext(),
+                    mMap,
+                    mClusterManager
+            );
+            mClusterManager.setRenderer(mClusterManagerRenderer);
+        }
 
         locations.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
+
                         //Toast.makeText(this, document.getData(), Toast.LENGTH_SHORT).show();
                         Log.d("example", document.getId() + " => " + document.getData());
                         GeoPoint geoPoint = document.getGeoPoint("location");
                         monuments.add(new LatLng(geoPoint.getLatitude(), geoPoint.getLongitude()));
-                        mMap.addMarker(new MarkerOptions().position(monuments.get(monuments.size() - 1)).title(document.getId()));
+
+                        mMap.addMarker(new MarkerOptions().position(monuments.get(monuments.size() - 1)).
+                                title(document.getId()).icon(BitmapDescriptorFactory.
+                                fromResource(pictures.get(counter))).snippet("Monument"));
+                        counter = counter + 1;
                     }
 
-                } else {
-                    //Log.w(TAG, "Error getting documents.", task.getException());
                 }
+                //mClusterManager.cluster();
+
             }
         });
 
