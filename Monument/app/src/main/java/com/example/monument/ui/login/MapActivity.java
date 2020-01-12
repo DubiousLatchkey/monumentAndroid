@@ -81,6 +81,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
 
     private GoogleMap mMap;
     private FloatingActionButton storeButton;
+    private FloatingActionButton profileButton;
 
     private ArrayList<LatLng> monuments;
 
@@ -275,6 +276,17 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
 
         });
 
+        profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                intent.putExtra("currency", user.getCurrency());
+                intent.putExtra("email", user.getUser());
+                startActivity(intent);
+            }
+        });
+
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -285,8 +297,6 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, 
         });
 
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-
 
     }
 
