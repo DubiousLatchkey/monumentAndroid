@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         menus = (LinearLayout) findViewById(R.id.menus);
         coins = (TextView) findViewById(R.id.currency);
 
-        bgapp.animate().translationY(-1500).setDuration(800).setStartDelay(300);
-        clover.animate().alpha(0).setDuration(800).setStartDelay(600);
+        bgapp.animate().translationY(-1500).setDuration(800).setStartDelay(500);
+        clover.animate().alpha(0).setDuration(800).setStartDelay(800);
         textsplash.animate().translationY(140).alpha(0).setDuration(800).setStartDelay(300);
 
         texthome.startAnimation(frombottom);
