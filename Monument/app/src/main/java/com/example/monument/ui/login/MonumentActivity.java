@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
     TextView title;
     Button cameraButton;
     ImageView preview;
+    LinearLayout previewLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
         title = findViewById(R.id.monumentName);
         cameraButton = findViewById(R.id.photoButton);
         preview = findViewById(R.id.previewImageView);
+        previewLayout = findViewById(R.id.previewLayout);
 
         cameraButton.setOnClickListener(this);
 
@@ -69,6 +73,10 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+            /*ViewGroup.LayoutParams param = previewLayout.getLayoutParams();
+            param.width = imageBitmap.getWidth();
+            param.height = imageBitmap.getHeight();
+            previewLayout.setLayoutParams(param);*/
             preview.setImageBitmap(imageBitmap);
 
             FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
