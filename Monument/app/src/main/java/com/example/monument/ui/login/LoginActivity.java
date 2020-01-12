@@ -14,6 +14,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.SharedPreferences;
+
 
 import android.os.Debug;
 import android.text.Editable;
@@ -23,6 +25,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -42,11 +45,16 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
 
     private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth;
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPreferencesEditor;
+    private boolean saveLogin;
+    private String username, password;
     EditText usernameEditText;
     EditText passwordEditText;
     Button loginButton;
     ProgressBar loadingProgressBar;
     ImageView logoImage;
+    CheckBox checkBox;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,9 +65,18 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
+        checkBox = findViewById(R.id.checkBox);
         loginButton = findViewById(R.id.login);
         loadingProgressBar = findViewById(R.id.loading);
         logoImage = findViewById(R.id.monumentLogo);
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginPreferencesEditor = loginPreferences.edit();
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin){
+            usernameEditText.setText(loginPreferences.getString("username", ""));
+            passwordEditText.setText(loginPreferences.getString("password", ""));
+            checkBox.setChecked(true);
+        }
 
         loginButton.setOnClickListener(this);
 
@@ -151,6 +168,8 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
+
+
                             Toast.makeText(LoginActivity.this, "Authentication Succeeded.",
                                     Toast.LENGTH_SHORT).show();
                             goToMap();
@@ -185,13 +204,31 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     public void onClick(View v) {
         //System.out.println("Button Pressed");
         //Toast.makeText(getApplicationContext(), "Button Pressed", Toast.LENGTH_SHORT).show();
+        username = usernameEditText.getText().toString();
+        password = passwordEditText.getText().toString();
+
+        if (checkBox.isChecked()) {
+            loginPreferencesEditor.putBoolean("saveLogin", true);
+            loginPreferencesEditor.putString("username", username);
+            loginPreferencesEditor.putString("password", password);
+            loginPreferencesEditor.commit();
+        } else {
+            loginPreferencesEditor.clear();
+            loginPreferencesEditor.commit();
+        }
+
         if(v.getId() == loginButton.getId()){
             signIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
         }
     }
 
     private void goToMap(){
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
         Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("user", user.getEmail());
+
         startActivity(intent);
     }
 }
