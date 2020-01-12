@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        usernameEditText = findViewById(R.id.username);
+        usernameEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         checkBox = findViewById(R.id.checkBox);
         loginButton = findViewById(R.id.login);
@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
         }
 
         loginButton.setOnClickListener(this);
+        registerButton.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -206,22 +207,34 @@ public class LoginActivity extends AppCompatActivity implements  View.OnClickLis
     public void onClick(View v) {
         //System.out.println("Button Pressed");
         //Toast.makeText(getApplicationContext(), "Button Pressed", Toast.LENGTH_SHORT).show();
-        username = usernameEditText.getText().toString();
-        password = passwordEditText.getText().toString();
+        switch (v.getId()) {
 
-        if (checkBox.isChecked()) {
-            loginPreferencesEditor.putBoolean("saveLogin", true);
-            loginPreferencesEditor.putString("username", username);
-            loginPreferencesEditor.putString("password", password);
-            loginPreferencesEditor.commit();
-        } else {
-            loginPreferencesEditor.clear();
-            loginPreferencesEditor.commit();
+            case R.id.login:
+                username = usernameEditText.getText().toString();
+                password = passwordEditText.getText().toString();
+
+                if (checkBox.isChecked()) {
+                    loginPreferencesEditor.putBoolean("saveLogin", true);
+                    loginPreferencesEditor.putString("username", username);
+                    loginPreferencesEditor.putString("password", password);
+                    loginPreferencesEditor.commit();
+                } else {
+                    loginPreferencesEditor.clear();
+                    loginPreferencesEditor.commit();
+                }
+
+                if(v.getId() == loginButton.getId()){
+                    signIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                }
+                break;
+
+            case R.id.registerButton:
+                Intent intent = new Intent(this,RegisterActivity.class);
+                startActivity(intent);
         }
 
-        if(v.getId() == loginButton.getId()){
-            signIn(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-        }
+
+
     }
 
     private void goToMap(){
