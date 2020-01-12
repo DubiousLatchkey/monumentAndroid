@@ -57,7 +57,7 @@ public class MonumentActivity extends AppCompatActivity implements View.OnClickL
         title.setText(getIntent().getStringExtra("monumentName"));
 
         visitedMonuments = getIntent().getStringArrayListExtra("monuments");
-        Log.d("tag", visitedMonuments.get(0));
+        //Log.d("tag", visitedMonuments.get(0));
     }
 
     @Override
