@@ -14,11 +14,14 @@ public class MainActivity extends AppCompatActivity {
     ImageView bgapp, clover;
     LinearLayout textsplash, texthome, menus;
     Animation frombottom;
+    long currency;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        currency = getIntent().getLongExtra("currency", 0);
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 

@@ -86,13 +86,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
 
         monuments = new ArrayList<>();
         storeButton = findViewById(R.id.storeButton);
-        storeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class); //Placeholder, TODO: replace with store class
-                startActivity(intent);
-            }
-        });
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
     }
@@ -145,7 +139,7 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
         googleMap.setOnMarkerClickListener(this);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(34, -119)));
-        ;
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         final CollectionReference locations = db.collection("Locations");
@@ -200,6 +194,15 @@ GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener{
                 } else {
                     //Log.w(TAG, "Error getting documents.", task.getException());
                 }
+            }
+        });
+
+        storeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("currency", user.getCurrency());
+                startActivity(intent);
             }
         });
 
