@@ -108,7 +108,7 @@
                     android:id="@+id/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:text="Purchase" />
 
             </LinearLayout>
 
@@ -136,7 +136,7 @@
                     android:id="@+id/button4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:text="Purchase" />
 
                 />
 
@@ -175,7 +175,7 @@
                     android:id="@+id/button5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:text="Purchase" />
 
             </LinearLayout>
 
@@ -203,7 +203,7 @@
                     android:id="@+id/button6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:text="Purchase" />
 
             </LinearLayout>
 
